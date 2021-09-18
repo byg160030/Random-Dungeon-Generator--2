@@ -8,6 +8,8 @@ public class TileSpawner : MonoBehaviour {
 
 	void Start () {
 		dungMan = FindObjectOfType<DungeonManager>();
+		GameObject goFloor = Instantiate(dungMan.floorPrefab, transform.position, Quaternion.identity) as GameObject;
+		goFloor.name = dungMan.floorPrefab.name;
 	}
 	
 	void OnDrawGizmos()
