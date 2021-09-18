@@ -11,6 +11,10 @@ public class TileSpawner : MonoBehaviour {
 		GameObject goFloor = Instantiate(dungMan.floorPrefab, transform.position, Quaternion.identity) as GameObject;
 		goFloor.name = dungMan.floorPrefab.name;
 		goFloor.transform.SetParent(dungMan.transform);
+
+
+
+		Destroy(gameObject);
 	}
 	
 	void OnDrawGizmos()
