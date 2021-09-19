@@ -223,10 +223,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 029ef9d800d268844bcd015d50bdd462, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  randomItems:
+  - {fileID: 7524506027853033802, guid: 180100ff192281446b1f736d47226c69, type: 3}
+  - {fileID: 2180024670015798635, guid: 2d77dd6c81e33fe4387802064b3a3af8, type: 3}
+  - {fileID: 5965643617177119386, guid: 913dd03283f5a594baf98a27c69736b9, type: 3}
+  - {fileID: 7843924762800794654, guid: 2b48d999f80860145b1e26c2c66687a8, type: 3}
+  - {fileID: 8651430813179795508, guid: de2e1496efff9f648bb3044da26c6147, type: 3}
   floorPrefab: {fileID: 1563483618555428, guid: 98f739b1e9298fb40bc11d50d5ba26f8,
     type: 3}
   wallPrefab: {fileID: 1540502035094780, guid: 6516e685c0888b3488fd55cbb0a3988c, type: 3}
   tilePrefab: {fileID: 4674241264543322834, guid: cf8807025b4669343a8a63d47c62da0b,
+    type: 3}
+  exitPrefab: {fileID: 3145457865360327812, guid: 9244e0d2e9caeb14cae11fb1a4f1858d,
     type: 3}
   minX: 0
   maxX: 0
