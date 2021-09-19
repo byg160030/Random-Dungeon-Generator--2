@@ -22,6 +22,11 @@ public class Player : MonoBehaviour {
 
 	void Update()
 	{
+		Move();
+	}
+
+    void Move()
+    {
 		float horz = System.Math.Sign(Input.GetAxisRaw("Horizontal"));
 		float vert = System.Math.Sign(Input.GetAxisRaw("Vertical"));
 		if (Mathf.Abs(horz) > 0 || Mathf.Abs(vert) > 0)
@@ -51,7 +56,7 @@ public class Player : MonoBehaviour {
 		}
 	}
 
-	IEnumerator SmoothMove()
+    IEnumerator SmoothMove()
     {
 		isMoving = true;
 		while(Vector2.Distance(transform.position, targetPos) > 0.01f)
