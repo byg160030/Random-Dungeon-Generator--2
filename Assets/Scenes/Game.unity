@@ -235,6 +235,23 @@ MonoBehaviour:
   - {fileID: 703759106336629817, guid: 3ce5b0728b76cf645965ce0580e2695d, type: 3}
   - {fileID: 7135065923825413204, guid: c3f75376466ce3e4391a88381af2baea, type: 3}
   - {fileID: 8093745165412652513, guid: d013abcdf5c28cd439e831f3a122ecd5, type: 3}
+  roundedEdges:
+  - {fileID: 5151850242005749665, guid: 8df9fdd49b344e046aa5955df6648a20, type: 3}
+  - {fileID: 3959726615179939804, guid: ea22123dcf271ce48a158e1811032b06, type: 3}
+  - {fileID: 2211893349271563164, guid: 9589ccfdc903a4f48a32bc9fa35604ea, type: 3}
+  - {fileID: 1320878382961629907, guid: 041524d69e66c6b43b2126e30975e0d4, type: 3}
+  - {fileID: 323317637750530353, guid: f0a67518d542f2840bee2593bc817caf, type: 3}
+  - {fileID: 8363591268721800340, guid: 61801ec1c2950724eb02d143980eb5ce, type: 3}
+  - {fileID: 566389876840904407, guid: f671b95d5a5d38342843450fa1af8ab3, type: 3}
+  - {fileID: 7548169960607397913, guid: 2cd27789754575c438e60d2453c724f4, type: 3}
+  - {fileID: 6810038584271545374, guid: 50c412e4446198e4fa5b446ddca03f22, type: 3}
+  - {fileID: 4562783375335959680, guid: 5513b8947dccf634dbddcc4571e5f1ac, type: 3}
+  - {fileID: 6795814155612844574, guid: 4bc88701e2500c34ba3816028ca77326, type: 3}
+  - {fileID: 4846606169305521639, guid: e706e93804b286a4bae201842247e5b5, type: 3}
+  - {fileID: 8529388111507798334, guid: 07643d1946003d947a967933810716f4, type: 3}
+  - {fileID: 4236940403121417075, guid: c2810a91b8f9fb14d9d5e4837daf0ad8, type: 3}
+  - {fileID: 463967213661131842, guid: ea0db798f613da147acc1e755094fa4d, type: 3}
+  - {fileID: 3793306947888807089, guid: d82d7fde306c45646b24259bbc84c1b5, type: 3}
   floorPrefab: {fileID: 1563483618555428, guid: 98f739b1e9298fb40bc11d50d5ba26f8,
     type: 3}
   wallPrefab: {fileID: 1540502035094780, guid: 6516e685c0888b3488fd55cbb0a3988c, type: 3}
@@ -245,6 +262,7 @@ MonoBehaviour:
   totalFloorCount: 648
   itemSpawnPercent: 2
   enemySpawnPercent: 4
+  useRoundedEdges: 1
   minX: 0
   maxX: 0
   minY: 0
