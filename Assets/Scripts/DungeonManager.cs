@@ -41,23 +41,8 @@ public class DungeonManager : MonoBehaviour {
         floorList.Add(curPos);
         while (floorList.Count < totalFloorCount)
         {
-            switch (Random.Range(1, 5))
-            {
-                case 1: curPos += Vector3.up; break;
-                case 2: curPos += Vector3.right; break;
-                case 3: curPos += Vector3.down; break;
-                case 4: curPos += Vector3.left; break;
-            }
-            bool inFloorList = false;
-            for (int i = 0; i < floorList.Count; i++)
-            {
-                if (Vector3.Equals(curPos, floorList[i]))
-                {
-                    inFloorList = true;
-                    break;
-                }
-            }
-            if (!inFloorList)
+            curPos += RandomDirection();
+            if (!InFloorList(curPos))
             {
                 floorList.Add(curPos);
             }
@@ -70,6 +55,30 @@ public class DungeonManager : MonoBehaviour {
         }
         StartCoroutine(DelayProgress());
     }
+
+    bool InFloorList(Vector3 myPos) {
+        for (int i = 0; i < floorList.Count; i++)
+        {
+            if (Vector3.Equals(myPos, floorList[i]))
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    Vector3 RandomDirection()
+    {
+        switch (Random.Range(1, 5))
+        {
+            case 1: return Vector3.up;
+            case 2: return Vector3.right;
+            case 3: return Vector3.down;
+            case 4: return Vector3.left;
+        }
+        return Vector3.zero;
+    }
+
     IEnumerator DelayProgress()
     {
         while (FindObjectsOfType<TileSpawner>().Length > 0)
