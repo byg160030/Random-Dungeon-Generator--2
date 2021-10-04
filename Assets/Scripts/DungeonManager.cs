@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+public enum DungeonType {  Caverns, Rooms }
+
 public class DungeonManager : MonoBehaviour {
 
     public GameObject[] randomItems, randomEnemies, roundedEdges;
@@ -11,6 +13,7 @@ public class DungeonManager : MonoBehaviour {
     [Range(0, 100)] public int itemSpawnPercent;
     [Range(0, 100)] public int enemySpawnPercent;
     public bool useRoundedEdges;
+    public DungeonType dungeonType;
 
     [HideInInspector] public float minX, maxX, minY, maxY;
 
@@ -23,7 +26,11 @@ public class DungeonManager : MonoBehaviour {
         hitSize = Vector2.one * 0.8f;
         floorMask = LayerMask.GetMask("Floor");
         wallMask = LayerMask.GetMask("Wall");
-        RandomWalker();
+        switch(dungeonType)
+        {
+            case DungeonType.Caverns: RandomWalker(); break;
+            case DungeonType.Rooms: RoomWalker();     break;
+        }
     }
 
     void Update()
@@ -47,11 +54,28 @@ public class DungeonManager : MonoBehaviour {
                 floorList.Add(curPos);
             }
         }
-        for (int i = 0; i < floorList.Count; i++)
+        StartCoroutine(DelayProgress());
+    }
+
+    void RoomWalker()
+    {
+        Vector3 curPos = Vector3.zero;
+        //set floor tile at curPos
+        floorList.Add(curPos);
+        while (floorList.Count < totalFloorCount)
         {
-            GameObject goTile = Instantiate(tilePrefab, floorList[i], Quaternion.identity) as GameObject;
-            goTile.name = tilePrefab.name;
-            goTile.transform.SetParent(transform);
+            Vector3 walkDir = RandomDirection();
+            int walkLength = Random.Range(9, 18);
+            for(int i = 0; i < walkLength; i++)
+            {
+                if (!InFloorList(curPos + walkDir))
+                {
+                    floorList.Add(curPos + walkDir);
+                }
+                curPos += walkDir;
+            }
+            // random room at the end of the long walk
+
         }
         StartCoroutine(DelayProgress());
     }
@@ -81,6 +105,12 @@ public class DungeonManager : MonoBehaviour {
 
     IEnumerator DelayProgress()
     {
+        for (int i = 0; i < floorList.Count; i++)
+        {
+            GameObject goTile = Instantiate(tilePrefab, floorList[i], Quaternion.identity) as GameObject;
+            goTile.name = tilePrefab.name;
+            goTile.transform.SetParent(transform);
+        }
         while (FindObjectsOfType<TileSpawner>().Length > 0)
         {
             yield return null;
