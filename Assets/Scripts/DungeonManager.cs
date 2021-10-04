@@ -75,7 +75,19 @@ public class DungeonManager : MonoBehaviour {
                 curPos += walkDir;
             }
             // random room at the end of the long walk
-
+            int width = Random.Range(1, 5);
+            int height = Random.Range(1, 5);
+            for (int w = -width; w <= width; w++)
+            {
+                for (int h = -height; h <= height; h++)
+                {
+                    Vector3 offset = new Vector3(w, h, 0);
+                    if (!InFloorList(curPos + offset))
+                    {
+                        floorList.Add(curPos + offset);
+                    }
+                }
+            }
         }
         StartCoroutine(DelayProgress());
     }
