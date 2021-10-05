@@ -122,4 +122,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39e650a31fe4d494eb555968b07f10d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dmgRange: {x: 0, y: 0}
+  chaseSpeed: 1
+  alertRange: 5
   patrolInterval: {x: 1, y: 2}
