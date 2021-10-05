@@ -67,5 +67,4 @@ public class Player : MonoBehaviour {
 		transform.position = targetPos;
 		isMoving = false;
     }
-
 }

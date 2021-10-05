@@ -261,9 +261,10 @@ MonoBehaviour:
     type: 3}
   totalFloorCount: 648
   itemSpawnPercent: 2
-  enemySpawnPercent: 4
+  enemySpawnPercent: 3
   useRoundedEdges: 1
   dungeonType: 1
+  windingHallPercent: 54
   minX: 0
   maxX: 0
   minY: 0

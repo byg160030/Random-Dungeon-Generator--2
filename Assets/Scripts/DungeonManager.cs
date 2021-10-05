@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public enum DungeonType {  Caverns, Rooms }
+public enum DungeonType {  Caverns, Rooms, Winding }
 
 public class DungeonManager : MonoBehaviour {
 
@@ -14,6 +14,7 @@ public class DungeonManager : MonoBehaviour {
     [Range(0, 100)] public int enemySpawnPercent;
     public bool useRoundedEdges;
     public DungeonType dungeonType;
+    [Range(0, 100)] public int windingHallPercent;
 
     [HideInInspector] public float minX, maxX, minY, maxY;
 
@@ -30,6 +31,7 @@ public class DungeonManager : MonoBehaviour {
         {
             case DungeonType.Caverns: RandomWalker(); break;
             case DungeonType.Rooms: RoomWalker();     break;
+            case DungeonType.Winding: WindingWalker(); break;
         }
     }
 
@@ -64,32 +66,60 @@ public class DungeonManager : MonoBehaviour {
         floorList.Add(curPos);
         while (floorList.Count < totalFloorCount)
         {
-            Vector3 walkDir = RandomDirection();
-            int walkLength = Random.Range(9, 18);
-            for(int i = 0; i < walkLength; i++)
+            curPos = TakeAHike(curPos);
+            RandomRoom(curPos);
+        }
+        StartCoroutine(DelayProgress());
+    }
+
+    void WindingWalker()
+    {
+        Vector3 curPos = Vector3.zero;
+        //set floor tile at curPos
+        floorList.Add(curPos);
+        while (floorList.Count < totalFloorCount)
+        {
+            curPos = TakeAHike(curPos);
+            int roll = Random.Range(0, 100);
+            if (roll > windingHallPercent)
             {
-                if (!InFloorList(curPos + walkDir))
-                {
-                    floorList.Add(curPos + walkDir);
-                }
-                curPos += walkDir;
-            }
-            // random room at the end of the long walk
-            int width = Random.Range(1, 5);
-            int height = Random.Range(1, 5);
-            for (int w = -width; w <= width; w++)
-            {
-                for (int h = -height; h <= height; h++)
-                {
-                    Vector3 offset = new Vector3(w, h, 0);
-                    if (!InFloorList(curPos + offset))
-                    {
-                        floorList.Add(curPos + offset);
-                    }
-                }
+                RandomRoom(curPos);
             }
         }
         StartCoroutine(DelayProgress());
+    }
+
+    Vector3 TakeAHike(Vector3 myPos)
+    {
+        Vector3 walkDir = RandomDirection();
+        int walkLength = Random.Range(9, 18);
+        for (int i = 0; i < walkLength; i++)
+        {
+            if (!InFloorList(myPos + walkDir))
+            {
+                floorList.Add(myPos + walkDir);
+            }
+            myPos += walkDir;
+        }
+        return myPos;
+    }
+
+    void RandomRoom(Vector3 myPos)
+    {
+        // random room at the end of the long walk
+        int width = Random.Range(1, 5);
+        int height = Random.Range(1, 5);
+        for (int w = -width; w <= width; w++)
+        {
+            for (int h = -height; h <= height; h++)
+            {
+                Vector3 offset = new Vector3(w, h, 0);
+                if (!InFloorList(myPos + offset))
+                {
+                    floorList.Add(myPos + offset);
+                }
+            }
+        }
     }
 
     bool InFloorList(Vector3 myPos) {
