@@ -17,7 +17,7 @@ TagManager:
   - Enemy
   - Wall
   - Floor
-  - 
+  - Fog
   - 
   - 
   - 
@@ -49,4 +49,7 @@ TagManager:
     locked: 0
   - name: Wall
     uniqueID: 431730613
+    locked: 0
+  - name: Fog
+    uniqueID: 1195569955
     locked: 0

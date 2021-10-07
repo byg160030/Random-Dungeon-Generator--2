@@ -8,7 +8,7 @@ public enum DungeonType {  Caverns, Rooms, Winding }
 public class DungeonManager : MonoBehaviour {
 
     public GameObject[] randomItems, randomEnemies, roundedEdges;
-    public GameObject floorPrefab, wallPrefab, tilePrefab, exitPrefab;
+    public GameObject floorPrefab, wallPrefab, tilePrefab, exitPrefab, fogPrefab;
     [Range(50, 5000)] public int totalFloorCount;
     [Range(0, 100)] public int itemSpawnPercent;
     [Range(0, 100)] public int enemySpawnPercent;
@@ -21,13 +21,15 @@ public class DungeonManager : MonoBehaviour {
     List<Vector3> floorList = new List<Vector3>();
     LayerMask floorMask, wallMask;
     Vector2 hitSize;
+    Transform fogContainer;
 
     void Start()
     {
         hitSize = Vector2.one * 0.8f;
         floorMask = LayerMask.GetMask("Floor");
         wallMask = LayerMask.GetMask("Wall");
-        switch(dungeonType)
+        fogContainer = GameObject.Find("FogContainer").transform;
+        switch (dungeonType)
         {
             case DungeonType.Caverns: RandomWalker(); break;
             case DungeonType.Rooms: RoomWalker();     break;
@@ -176,9 +178,16 @@ public class DungeonManager : MonoBehaviour {
                     }
                 }
                 RoundedEdges(x, y);
-
+                SetFogTile(x, y);
             }
         }
+    }
+
+    void SetFogTile(int x, int y)
+    {
+        Vector3 pos = new Vector3(x, y, 0);
+        GameObject goFog = Instantiate(fogPrefab, pos, Quaternion.identity, fogContainer) as GameObject;
+        goFog.name = "Fog";
     }
 
     void RoundedEdges(int x, int y) {

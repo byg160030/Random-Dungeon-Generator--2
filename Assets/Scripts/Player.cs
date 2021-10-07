@@ -6,6 +6,7 @@ public class Player : MonoBehaviour {
 
 	public float speed;
 
+	Defogger defogger;
 	LayerMask obstacleMask;
 	Vector2 targetPos;
 	Transform GFX;
@@ -17,6 +18,7 @@ public class Player : MonoBehaviour {
 		obstacleMask = LayerMask.GetMask("Wall", "Enemy");
 		GFX = GetComponentInChildren<SpriteRenderer>().transform;
 		flipX = GFX.localScale.x;
+		defogger = GetComponent<Defogger>();
 	}
 
 
@@ -54,6 +56,7 @@ public class Player : MonoBehaviour {
 				}
 			}
 		}
+		GameObject.FindWithTag("Player").GetComponent<Defogger>().Defog();
 	}
 
     IEnumerator SmoothMove()
@@ -66,5 +69,6 @@ public class Player : MonoBehaviour {
         }
 		transform.position = targetPos;
 		isMoving = false;
+		defogger.Defog();
     }
 }
